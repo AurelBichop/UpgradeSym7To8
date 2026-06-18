@@ -15,7 +15,7 @@ final class LazyController extends AbstractController
 
         $part = $repository->find(1);
 
-        dump($part->getStarship()->getName(),$part);
+        dump($part);
 
         return $this->render('lazy/index.html.twig', [
             'controller_name' => 'LazyController',

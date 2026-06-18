@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation\Timestampable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: StarshipRepository::class)]
-class Starship
+final class Starship
 {
     use TimestampableEntity;
 

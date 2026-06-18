@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DroidRepository::class)]
-class Droid
+final class Droid
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

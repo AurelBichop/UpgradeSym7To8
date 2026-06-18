@@ -6,7 +6,7 @@ use App\Repository\StarshipDroidRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StarshipDroidRepository::class)]
-class StarshipDroid
+final class StarshipDroid
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
