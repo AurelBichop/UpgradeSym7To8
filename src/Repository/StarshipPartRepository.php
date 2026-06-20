@@ -20,7 +20,7 @@ class StarshipPartRepository extends ServiceEntityRepository
 
     public static function createExpensiveCriteria(): Criteria
     {
-        return Criteria::create()->andWhere(Criteria::expr()->gt('price', 50000));
+        return Criteria::create(true)->andWhere(Criteria::expr()->gt('price', 50000));
     }
 
     /**
