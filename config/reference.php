@@ -188,7 +188,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         only_exceptions?: bool|Param, // Default: false
  *         only_main_requests?: bool|Param, // Default: false
  *         dsn?: scalar|Param|null, // Default: "file:%kernel.cache_dir%/profiler"
- *         collect_serializer_data?: bool|Param, // Enables the serializer data collector and profiler panel. // Default: false
+ *         collect_serializer_data?: true|Param, // Default: true
  *     },
  *     workflows?: bool|array{
  *         enabled?: bool|Param, // Default: false
@@ -232,7 +232,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: false
  *         resource?: scalar|Param|null,
  *         type?: scalar|Param|null,
- *         cache_dir?: scalar|Param|null, // Deprecated: Setting the "framework.router.cache_dir.cache_dir" configuration option is deprecated. It will be removed in version 8.0. // Default: "%kernel.build_dir%"
  *         default_uri?: scalar|Param|null, // The default URI used to generate URLs in a non-HTTP context. // Default: null
  *         http_port?: scalar|Param|null, // Default: 80
  *         https_port?: scalar|Param|null, // Default: 443
@@ -256,8 +255,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         gc_maxlifetime?: scalar|Param|null,
  *         save_path?: scalar|Param|null, // Defaults to "%kernel.cache_dir%/sessions" if the "handler_id" option is not null.
  *         metadata_update_threshold?: int|Param, // Seconds to wait between 2 session metadata updates. // Default: 0
- *         sid_length?: int|Param, // Deprecated: Setting the "framework.session.sid_length.sid_length" configuration option is deprecated. It will be removed in version 8.0. No alternative is provided as PHP 8.4 has deprecated the related option.
- *         sid_bits_per_character?: int|Param, // Deprecated: Setting the "framework.session.sid_bits_per_character.sid_bits_per_character" configuration option is deprecated. It will be removed in version 8.0. No alternative is provided as PHP 8.4 has deprecated the related option.
  *     },
  *     request?: bool|array{ // Request configuration
  *         enabled?: bool|Param, // Default: false
@@ -331,11 +328,10 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     validation?: bool|array{ // Validation configuration
  *         enabled?: bool|Param, // Default: true
- *         cache?: scalar|Param|null, // Deprecated: Setting the "framework.validation.cache.cache" configuration option is deprecated. It will be removed in version 8.0.
  *         enable_attributes?: bool|Param, // Default: true
  *         static_method?: string|list<scalar|Param|null>,
  *         translation_domain?: scalar|Param|null, // Default: "validators"
- *         email_validation_mode?: "html5"|"html5-allow-no-tld"|"strict"|"loose"|Param, // Default: "html5"
+ *         email_validation_mode?: "html5"|"html5-allow-no-tld"|"strict"|Param, // Default: "html5"
  *         mapping?: array{
  *             paths?: list<scalar|Param|null>,
  *         },
@@ -347,9 +343,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         auto_mapping?: array<string, array{ // Default: []
  *             services?: list<scalar|Param|null>,
  *         }>,
- *     },
- *     annotations?: bool|array{
- *         enabled?: bool|Param, // Default: false
  *     },
  *     serializer?: bool|array{ // Serializer configuration
  *         enabled?: bool|Param, // Default: true
@@ -382,7 +375,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     property_info?: bool|array{ // Property info configuration
  *         enabled?: bool|Param, // Default: true
- *         with_constructor_extractor?: bool|Param, // Registers the constructor extractor.
+ *         with_constructor_extractor?: bool|Param, // Registers the constructor extractor. // Default: true
  *     },
  *     cache?: array{ // Cache configuration
  *         prefix_seed?: scalar|Param|null, // Used to namespace cache keys when using several apps with the same shared backend. // Default: "_%kernel.project_dir%.%kernel.container_class%"
@@ -699,7 +692,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     }>,
  *     autoescape_service?: scalar|Param|null, // Default: null
  *     autoescape_service_method?: scalar|Param|null, // Default: null
- *     base_template_class?: scalar|Param|null, // Deprecated: The child node "base_template_class" at path "twig.base_template_class" is deprecated.
  *     cache?: scalar|Param|null, // Default: true
  *     charset?: scalar|Param|null, // Default: "%kernel.charset%"
  *     debug?: bool|Param, // Default: "%kernel.debug%"
@@ -790,7 +782,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         bubble?: bool|Param, // Default: true
  *         interactive_only?: bool|Param, // Default: false
  *         app_name?: scalar|Param|null, // Default: null
- *         fill_extra_context?: bool|Param, // Default: false
  *         include_stacktraces?: bool|Param, // Default: false
  *         process_psr_3_messages?: array{
  *             enabled?: bool|Param|null, // Default: null
@@ -810,7 +801,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         activation_strategy?: scalar|Param|null, // Default: null
  *         stop_buffering?: bool|Param, // Default: true
  *         passthru_level?: scalar|Param|null, // Default: null
- *         excluded_404s?: list<scalar|Param|null>,
  *         excluded_http_codes?: list<array{ // Default: []
  *             code?: scalar|Param|null,
  *             urls?: list<scalar|Param|null>,
@@ -824,9 +814,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         url?: scalar|Param|null,
  *         exchange?: scalar|Param|null,
  *         exchange_name?: scalar|Param|null, // Default: "log"
- *         room?: scalar|Param|null,
- *         message_format?: scalar|Param|null, // Default: "text"
- *         api_version?: scalar|Param|null, // Default: null
  *         channel?: scalar|Param|null, // Default: null
  *         bot_name?: scalar|Param|null, // Default: "Monolog"
  *         use_attachment?: scalar|Param|null, // Default: true
@@ -835,9 +822,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         icon_emoji?: scalar|Param|null, // Default: null
  *         webhook_url?: scalar|Param|null,
  *         exclude_fields?: list<scalar|Param|null>,
- *         team?: scalar|Param|null,
- *         notify?: scalar|Param|null, // Default: false
- *         nickname?: scalar|Param|null, // Default: "Monolog"
  *         token?: scalar|Param|null,
  *         region?: scalar|Param|null,
  *         source?: scalar|Param|null,
@@ -855,12 +839,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         store?: scalar|Param|null, // Default: null
  *         connection_timeout?: scalar|Param|null,
  *         persistent?: bool|Param,
- *         dsn?: scalar|Param|null,
- *         hub_id?: scalar|Param|null, // Default: null
- *         client_id?: scalar|Param|null, // Default: null
- *         auto_log_stacks?: scalar|Param|null, // Default: false
- *         release?: scalar|Param|null, // Default: null
- *         environment?: scalar|Param|null, // Default: null
  *         message_type?: scalar|Param|null, // Default: 0
  *         parse_mode?: scalar|Param|null, // Default: null
  *         disable_webpage_preview?: bool|Param|null, // Default: null
@@ -870,7 +848,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         topic?: int|Param, // Default: null
  *         factor?: int|Param, // Default: 1
  *         tags?: string|list<scalar|Param|null>,
- *         console_formater_options?: mixed, // Deprecated: "monolog.handlers..console_formater_options.console_formater_options" is deprecated, use "monolog.handlers..console_formater_options.console_formatter_options" instead.
  *         console_formatter_options?: mixed, // Default: []
  *         formatter?: scalar|Param|null,
  *         nested?: bool|Param, // Default: false
@@ -880,15 +857,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *             port?: scalar|Param|null, // Default: 12201
  *             chunk_size?: scalar|Param|null, // Default: 1420
  *             encoder?: "json"|"compressed_json"|Param,
- *         },
- *         mongo?: string|array{
- *             id?: scalar|Param|null,
- *             host?: scalar|Param|null,
- *             port?: scalar|Param|null, // Default: 27017
- *             user?: scalar|Param|null,
- *             pass?: scalar|Param|null,
- *             database?: scalar|Param|null, // Default: "monolog"
- *             collection?: scalar|Param|null, // Default: "logs"
  *         },
  *         mongodb?: string|array{
  *             id?: scalar|Param|null, // ID of a MongoDB\Client service
@@ -932,7 +900,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *             id?: scalar|Param|null,
  *             method?: scalar|Param|null, // Default: null
  *         },
- *         lazy?: bool|Param, // Default: true
  *         verbosity_levels?: array{
  *             VERBOSITY_QUIET?: scalar|Param|null, // Default: "ERROR"
  *             VERBOSITY_NORMAL?: scalar|Param|null, // Default: "WARNING"
@@ -958,8 +925,10 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     config_file?: scalar|Param|null, // Path to the tailwind.config.js file // Default: "%kernel.project_dir%/tailwind.config.js"
  *     binary?: scalar|Param|null, // The tailwind binary to use instead of downloading a new one // Default: null
  *     binary_version?: scalar|Param|null, // Tailwind CLI version to download - null means the latest version // Default: null
+ *     binary_platform?: "auto"|"linux-arm64"|"linux-arm64-musl"|"linux-x64"|"linux-x64-musl"|"macos-arm64"|"macos-x64"|"windows-x64"|Param, // Tailwind CLI platform to download - "auto" will try to detect the platform automatically // Default: "auto"
  *     postcss_config_file?: scalar|Param|null, // Path to PostCSS config file which is passed to the Tailwind CLI // Default: null
  *     strict_mode?: bool|Param|null, // When enabled, an exception will be thrown if there are no built assets (default: false in `test` env, true otherwise) // Default: null
+ *     process_timeout?: int|Param, // Timeout in seconds for the Tailwind build process - use "0" to disable // Default: 60
  * }
  * @psalm-type StimulusConfig = array{
  *     controller_paths?: list<scalar|Param|null>,
