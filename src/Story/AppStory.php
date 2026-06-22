@@ -6,6 +6,7 @@ use App\Entity\StarshipStatusEnum;
 use App\Factory\DroidFactory;
 use App\Factory\StarshipFactory;
 use App\Factory\StarshipPartFactory;
+use App\Factory\UserFactory;
 use Zenstruck\Foundry\Attribute\AsFixture;
 use Zenstruck\Foundry\Story;
 
@@ -14,6 +15,13 @@ final class AppStory extends Story
 {
     public function build(): void
     {
+        UserFactory::createOne([
+                'email' => 'picard@enterprise.space',
+                'name' => 'Picard',
+                'password' => 'coucou',
+            ]
+        );
+
         StarshipFactory::createOne([
             'name' => 'USS LeafyCruiser (NCC-0001)',
             'class' => 'Garden',
@@ -36,7 +44,7 @@ final class AppStory extends Story
             'captain' => 'Kathryn Journeyway',
             'status' => StarshipStatusEnum::WAITING,
             'arrivedAt' => new \DateTimeImmutable('-1 month'),
-        ])->_real();
+        ]);
 
         StarshipPartFactory::createOne([
             'name' => 'Toilet Paper',

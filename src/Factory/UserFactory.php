@@ -2,13 +2,17 @@
 
 namespace App\Factory;
 
-use App\Entity\Droid;
-use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityRepository;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
+use Zenstruck\Foundry\Persistence\Proxy;
+use Zenstruck\Foundry\Persistence\ProxyRepositoryDecorator;
 
 /**
- * @extends \Zenstruck\Foundry\Persistence\PersistentObjectFactory<Droid>
+ * @extends PersistentObjectFactory<User>
  */
-final class DroidFactory extends \Zenstruck\Foundry\Persistence\PersistentObjectFactory
+final class UserFactory extends PersistentObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -19,9 +23,10 @@ final class DroidFactory extends \Zenstruck\Foundry\Persistence\PersistentObject
     {
     }
 
+    #[\Override]
     public static function class(): string
     {
-        return Droid::class;
+        return User::class;
     }
 
     /**
@@ -29,29 +34,25 @@ final class DroidFactory extends \Zenstruck\Foundry\Persistence\PersistentObject
      *
      * @todo add your default values here
      */
+    #[\Override]
     protected function defaults(): array|callable
     {
         return [
-            'name' => self::faker()->randomElement([
-                'R2-D2', 'C-3PO', 'BB-8', 'ZZZ-123',
-            ]),
-            'primaryFunction' => self::faker()->randomElement([
-                'astromech',
-                'protocol',
-                'astromech',
-                'assassin',
-                'sleeper',
-            ]),
+            'email' => self::faker()->unique()->email(),
+            'name' => self::faker()->name(),
+            'password' => 'engage',
+            'roles' => [],
         ];
     }
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
      */
+    #[\Override]
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Droid $droid): void {})
+            // ->afterInstantiate(function(User $user): void {})
         ;
     }
 }
